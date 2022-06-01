@@ -109,6 +109,7 @@ socket.on("candidate", (id, candidate) => {
 });
 
 socket.on("connect", () => {
+  console.log("socket connected");
   socket.emit("watcher");
 });
 
@@ -121,42 +122,13 @@ window.onunload = window.onbeforeunload = () => {
   peerConnection.close();
 };
 
-    window.onload = () => {
+window.onload = () => {
 
-      let xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function($evt){
-        if(xhr.readyState == 4 && xhr.status == 200){
-          let res = JSON.parse(xhr.responseText);
-		  iceSeverList = res.v.iceServers;
-          console.log('xirsys response: ',res);
-        }
-      }
-      xhr.open("PUT", "https://global.xirsys.net/_turn/robot001", true);
-      xhr.setRequestHeader ("Authorization", "Basic " + btoa("tk001:71d4d71a-b0a1-11ec-be91-0242ac130006") );
-      xhr.setRequestHeader ("Content-Type", "application/json");
-      xhr.send( JSON.stringify({"format": "urls"}) );
 
-    };
+};
 
 function enableAudio() {
   console.log("Enabling audio")
   video.muted = false;
 }
 
-
-
-//    {
-//      urls: "turn:openrelay.metered.ca:80",
-//      username: "openrelayproject",
-//      credential: "openrelayproject",
-//    },
-//    {
-//      urls: "turn:openrelay.metered.ca:443",
-//      username: "openrelayproject",
-//      credential: "openrelayproject",
-//    },
-//    {
-//      urls: "turn:openrelay.metered.ca:443?transport=tcp",
-//      username: "openrelayproject",
-//      credential: "openrelayproject",
-//    },
